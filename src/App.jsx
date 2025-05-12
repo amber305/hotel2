@@ -13,6 +13,8 @@ import Home from './pages/Home'
 import AllRooms from './pages/AllRooms'
 import RoomDetails from './pages/RoomDetails'
 import MyBookings from './pages/MyBookings'
+import Experience from './pages/Experience'
+import About from './pages/About'
 
 // Owner dashboard pages
 import Layout from './pages/hotelOwner/Layout'
@@ -48,6 +50,8 @@ const App = () => {
               <Route path="/" element={<Home />} />
               <Route path="/rooms" element={<AllRooms />} />
               <Route path="/rooms/:id" element={<RoomDetails />} />
+              <Route path="/experience" element={<Experience />} />
+              <Route path="/about" element={<About />} />
 
               {/* Protected Customer Routes */}
               <Route 
