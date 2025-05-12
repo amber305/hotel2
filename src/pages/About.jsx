@@ -1,10 +1,7 @@
 import React from 'react';
-import { assets } from '../assets/assets';
 
 const team = [
-  { name: 'Aditi Chauhan', role: 'Founder & CEO', img: assets.userIcon },
-  { name: 'Amber Singh', role: 'Lead Developer', img: assets.userIcon },
-  { name: 'Sam Patel', role: 'UI/UX Designer', img: assets.userIcon },
+  { name: 'Aditi Chaudhary', role: 'Developer', img: '/aditi-chaudhary.jpg' },
 ];
 
 const About = () => (
@@ -16,7 +13,7 @@ const About = () => (
     </div>
     {/* Mission Section */}
     <div className="mb-16 flex flex-col md:flex-row items-center gap-12 animate-fade-in-delay">
-      <img src={assets.logo} alt="QuickStay Logo" className="h-24 mb-6 md:mb-0 md:mr-10" />
+      <img src="/logo.svg" alt="QuickStay Logo" className="h-24 mb-6 md:mb-0 md:mr-10" />
       <div className="text-left max-w-xl">
         <h2 className="font-playfair text-2xl font-semibold text-gray-800 mb-2">Our Mission</h2>
         <p className="text-gray-600 text-base">To empower travelers with easy access to the world's best accommodations, providing exceptional service, innovative features, and a platform you can trust. We believe every journey should be special, and we're here to help you make the most of yours.</p>
