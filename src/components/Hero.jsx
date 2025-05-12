@@ -3,7 +3,7 @@ import { assets, cities } from '../assets/assets';
 
 const Hero = () => {
   return (
-    <div className="relative bg-cover bg-center min-h-screen text-white" style={{ backgroundImage: `url(/src/assets/heroImage.png)` }}>
+    <div className="relative bg-cover bg-center min-h-screen text-white" style={{ backgroundImage: `url(/heroImage.png)` }}>
       {/* Overlay with gradient */}
       <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/60 z-0"></div>
 
