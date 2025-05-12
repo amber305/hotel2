@@ -1,37 +1,39 @@
 import React from 'react';
+import { motion } from 'framer-motion';
+import aditiImg from '../assets/aditi-chaudhary.jpeg';
 
 const team = [
-  { name: 'Aditi Chaudhary', role: 'Developer', img: '/aditi-chaudhary.jpg' },
+  { name: 'Aditi Chaudhary', role: 'Developer & Creator', img: aditiImg },
 ];
 
 const About = () => (
-  <div className="min-h-screen bg-gradient-to-b from-white to-gray-50 pt-28 px-4 md:px-16 lg:px-24 xl:px-32">
+  <div className="min-h-screen bg-gradient-to-b from-white to-blue-50 pt-28 px-4 md:px-16 lg:px-24 xl:px-32">
     {/* Hero Section */}
-    <div className="text-center mb-16 animate-fade-in">
-      <h1 className="font-playfair text-4xl md:text-5xl font-bold text-gray-800 mb-4">About QuickStay</h1>
-      <p className="text-lg text-gray-500 max-w-2xl mx-auto">QuickStay is dedicated to making your travel experience seamless, comfortable, and memorable. We connect you with the best hotels and unique stays around the world.</p>
-    </div>
+    <motion.div initial={{ opacity: 0, y: -40 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }} className="text-center mb-16 animate-fade-in">
+      <h1 className="font-playfair text-4xl md:text-5xl font-bold text-blue-900 mb-4">About This Project</h1>
+      <p className="text-lg text-blue-700 max-w-2xl mx-auto">QuickStay is a modern hotel booking platform crafted with passion and precision by Aditi Chaudhary. The vision: to make travel seamless, stylish, and memorable for everyone.</p>
+    </motion.div>
     {/* Mission Section */}
-    <div className="mb-16 flex flex-col md:flex-row items-center gap-12 animate-fade-in-delay">
-      <img src="/logo.svg" alt="QuickStay Logo" className="h-24 mb-6 md:mb-0 md:mr-10" />
-      <div className="text-left max-w-xl">
-        <h2 className="font-playfair text-2xl font-semibold text-gray-800 mb-2">Our Mission</h2>
-        <p className="text-gray-600 text-base">To empower travelers with easy access to the world's best accommodations, providing exceptional service, innovative features, and a platform you can trust. We believe every journey should be special, and we're here to help you make the most of yours.</p>
+    <motion.div initial={{ opacity: 0, x: -40 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.8, delay: 0.2 }} className="mb-16 flex flex-col md:flex-row items-center gap-12 animate-fade-in-delay justify-center">
+      <div className="text-left max-w-xl bg-white/80 rounded-2xl shadow-lg p-8">
+        <h2 className="font-playfair text-2xl font-semibold text-blue-900 mb-2">A Note from the Creator</h2>
+        <p className="text-blue-700 text-base">"I built QuickStay to empower travelers with a beautiful, intuitive, and reliable platform. Every feature and design choice is made to enhance your journey, from booking to check-out. Thank you for being a part of this adventure!"</p>
+        <p className="mt-4 text-blue-900 font-semibold">— Aditi Chaudhary</p>
       </div>
-    </div>
+    </motion.div>
     {/* Team Section */}
-    <div className="mb-10 animate-fade-in-delay-2">
-      <h2 className="font-playfair text-2xl font-semibold text-gray-800 text-center mb-8">Meet Our Team</h2>
+    <motion.div initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.8, delay: 0.4 }} className="mb-10 animate-fade-in-delay-2">
+      <h2 className="font-playfair text-2xl font-semibold text-blue-900 text-center mb-8">Meet the Creator</h2>
       <div className="flex flex-wrap justify-center gap-8">
         {team.map((member, idx) => (
-          <div key={idx} className="bg-white rounded-2xl shadow-lg p-6 flex flex-col items-center w-60 hover:shadow-2xl transition-all duration-300">
-            <img src={member.img} alt={member.name} className="w-20 h-20 rounded-full mb-4 border-4 border-blue-100 object-cover" />
-            <h3 className="font-playfair text-lg font-semibold text-gray-800 mb-1">{member.name}</h3>
-            <p className="text-gray-500 text-sm">{member.role}</p>
-          </div>
+          <motion.div key={idx} initial={{ opacity: 0, scale: 0.9 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ duration: 0.7, delay: 0.6 }} className="bg-white rounded-2xl shadow-lg p-6 flex flex-col items-center w-60 hover:shadow-2xl transition-all duration-300">
+            <img src={member.img} alt={member.name} className="w-24 h-24 rounded-full mb-4 border-4 border-blue-200 object-cover shadow" />
+            <h3 className="font-playfair text-lg font-semibold text-blue-900 mb-1">{member.name}</h3>
+            <p className="text-blue-700 text-sm">{member.role}</p>
+          </motion.div>
         ))}
       </div>
-    </div>
+    </motion.div>
   </div>
 );
 
