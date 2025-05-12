@@ -1,8 +1,14 @@
-import React from 'react'
+import React, { Suspense } from 'react'
 import { Route, Routes, useLocation } from 'react-router-dom'
+import { SignedIn, SignedOut, RedirectToSignIn } from '@clerk/clerk-react'
 
+// Components
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
+import ErrorBoundary from './components/ErrorBoundary'
+import LoadingSpinner from './components/LoadingSpinner'
+
+// Customer Pages
 import Home from './pages/Home'
 import AllRooms from './pages/AllRooms'
 import RoomDetails from './pages/RoomDetails'
@@ -14,34 +20,66 @@ import Dashboard from './pages/hotelOwner/Dashboard'
 import AddRoom from './pages/hotelOwner/AddRoom'
 import ListRoom from './pages/hotelOwner/ListRoom'
 
+const ProtectedRoute = ({ children }) => {
+  return (
+    <>
+      <SignedIn>{children}</SignedIn>
+      <SignedOut>
+        <RedirectToSignIn />
+      </SignedOut>
+    </>
+  );
+};
+
 const App = () => {
-  const isOwnerPath = useLocation().pathname.includes("owner");
+  const location = useLocation();
+  const isOwnerPath = location.pathname.includes("owner");
 
   return (
-    <div>
-      {/* Show Navbar only for customer side */}
-      {!isOwnerPath && <Navbar />}
+    <ErrorBoundary>
+      <div className="min-h-screen flex flex-col">
+        {/* Show Navbar only for customer side */}
+        {!isOwnerPath && <Navbar />}
 
-      <div className='min-h-[70vh]'>
-        <Routes>
-          {/* Customer Routes */}
-          <Route path='/' element={<Home />} />
-          <Route path='/rooms' element={<AllRooms />} />
-          <Route path='/rooms/:id' element={<RoomDetails />} />
-          <Route path='/my-bookings' element={<MyBookings />} />
+        <main className="flex-grow">
+          <Suspense fallback={<LoadingSpinner />}>
+            <Routes>
+              {/* Public Routes */}
+              <Route path="/" element={<Home />} />
+              <Route path="/rooms" element={<AllRooms />} />
+              <Route path="/rooms/:id" element={<RoomDetails />} />
 
-          {/* Hotel Owner Routes */}
-          <Route path='/owner' element={<Layout />}>
-            <Route index element={<Dashboard />} />
-            <Route path='add-room' element={<AddRoom />} />
-            <Route path='list-room' element={<ListRoom />} />
-          </Route>
-        </Routes>
+              {/* Protected Customer Routes */}
+              <Route 
+                path="/my-bookings" 
+                element={
+                  <ProtectedRoute>
+                    <MyBookings />
+                  </ProtectedRoute>
+                } 
+              />
+
+              {/* Protected Hotel Owner Routes */}
+              <Route 
+                path="/owner" 
+                element={
+                  <ProtectedRoute>
+                    <Layout />
+                  </ProtectedRoute>
+                }
+              >
+                <Route index element={<Dashboard />} />
+                <Route path="add-room" element={<AddRoom />} />
+                <Route path="list-room" element={<ListRoom />} />
+              </Route>
+            </Routes>
+          </Suspense>
+        </main>
+
+        {/* Show Footer only for customer side */}
+        {!isOwnerPath && <Footer />}
       </div>
-
-      {/* Show Footer only for customer side */}
-      {!isOwnerPath && <Footer />}
-    </div>
+    </ErrorBoundary>
   )
 }
 
